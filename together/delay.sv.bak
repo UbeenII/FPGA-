@@ -1,0 +1,15 @@
+module delay (
+	input logic [13:0] prbs,
+	input logic trigger,
+	input logic clk,
+	output logic time_out
+);
+
+logic[13:0] count;
+assign count = prbs;
+
+if (trigger == 1) 
+	always_ff @ (posedge clk)
+		count <= count + {{14 - 1{1'b0}}, 1};
+		
+endmodule
